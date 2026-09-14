@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Second Banker Advisor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <h1>Second Banker Advisor</h1>
+        <p class="muted">Rule-based session tracker — not a predictor</p>
+      </div>
+      <div class="top-actions">
+        <button id="voiceBtn" class="secondary">Voice: Off</button>
+        <button id="newSessionBtn" class="secondary">New Session</button>
+      </div>
+    </header>
+
+    <section class="grid stats-grid">
+      <div class="card stat"><span>Bankroll</span><strong id="bankroll">R500.00</strong></div>
+      <div class="card stat"><span>Session P/L</span><strong id="sessionPL">R0.00</strong></div>
+      <div class="card stat"><span>Player Streak</span><strong id="playerStreak">0</strong></div>
+      <div class="card stat"><span>Progression</span><strong id="progression">—</strong></div>
+    </section>
+
+    <section class="card advisor" id="advisorCard">
+      <span class="eyebrow">Current advice</span>
+      <h2 id="advisorTitle">WAIT</h2>
+      <p id="advisorText">Looking for 2+ consecutive Player results.</p>
+      <div id="betAmount" class="bet-amount"></div>
+      <div id="cycleHint" class="cycle-hint"></div>
+    </section>
+
+    <section class="card controls">
+      <div class="result-buttons">
+        <button id="playerBtn" class="result player">PLAYER</button>
+        <button id="bankerBtn" class="result banker">BANKER</button>
+        <button id="tieBtn" class="result tie">TIE</button>
+      </div>
+      <div class="action-row">
+        <button id="undoBtn" class="secondary">Undo Last Hand</button>
+        <button id="resetShoeBtn" class="secondary danger-outline">Reset Shoe</button>
+        <button id="exportBtn" class="secondary">Export CSV</button>
+      </div>
+    </section>
+
+    <section class="grid two-col">
+      <section class="card">
+        <div class="section-head">
+          <h3>Shoe</h3>
+          <span id="handCount" class="muted">0 hands</span>
+        </div>
+        <div id="road" class="road"></div>
+        <div class="shoe-summary">
+          <span>Player: <strong id="countP">0</strong></span>
+          <span>Banker: <strong id="countB">0</strong></span>
+          <span>Tie: <strong id="countT">0</strong></span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Current Cycle</h3>
+        <dl class="details">
+          <div><dt>State</dt><dd id="state">WAITING</dd></div>
+          <div><dt>Cycle</dt><dd id="cycleNo">0</dd></div>
+          <div><dt>Trigger armed</dt><dd id="armed">No</dd></div>
+          <div><dt>Current level</dt><dd id="level">—</dd></div>
+          <div><dt>Losses after trigger</dt><dd id="losses">0</dd></div>
+        </dl>
+      </section>
+    </section>
+
+    <section class="grid two-col">
+      <section class="card">
+        <h3>Session Statistics</h3>
+        <dl class="details">
+          <div><dt>Cycles won</dt><dd id="cyclesWon">0</dd></div>
+          <div><dt>Cycles re-armed</dt><dd id="cyclesRearmed">0</dd></div>
+          <div><dt>Total wagered</dt><dd id="totalWagered">R0.00</dd></div>
+          <div><dt>Highest bankroll</dt><dd id="highBankroll">R500.00</dd></div>
+          <div><dt>Lowest bankroll</dt><dd id="lowBankroll">R500.00</dd></div>
+          <div><dt>Max drawdown</dt><dd id="maxDrawdown">R0.00</dd></div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <h3>Cycle Performance</h3>
+        <dl class="details">
+          <div><dt>Level 1 wins</dt><dd id="level1Wins">0</dd></div>
+          <div><dt>Level 2 wins</dt><dd id="level2Wins">0</dd></div>
+          <div><dt>Level 3 wins</dt><dd id="level3Wins">0</dd></div>
+          <div><dt>Win rate</dt><dd id="cycleWinRate">0%</dd></div>
+          <div><dt>Avg. cycle result</dt><dd id="avgCycleResult">R0.00</dd></div>
+        </dl>
+      </section>
+    </section>
+
+    <section class="card">
+      <h3>Settings</h3>
+      <div class="settings">
+        <label>Starting bankroll
+          <input id="startingBankrollInput" type="number" min="1" step="1" value="500" />
+        </label>
+        <label>Base unit
+          <input id="baseUnitInput" type="number" min="1" step="1" value="10" />
+        </label>
+        <label>Banker commission %
+          <input id="commissionInput" type="number" min="0" max="100" step="0.1" value="5" />
+        </label>
+        <label>Take profit
+          <input id="takeProfitInput" type="number" min="0" step="1" value="50" />
+        </label>
+        <label>Stop loss
+          <input id="stopLossInput" type="number" min="0" step="1" value="100" />
+        </label>
+      </div>
+      <button id="applySettingsBtn" class="secondary">Apply Settings</button>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h3>Session History</h3>
+        <button id="clearHistoryBtn" class="secondary">Clear History</button>
+      </div>
+      <div id="historyList" class="history-list muted">No completed sessions yet.</div>
+    </section>
+
+    <footer>
+      Strategy signals follow fixed rules. Previous baccarat results do not determine the next result.
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
