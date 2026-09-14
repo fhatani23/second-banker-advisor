@@ -35,3 +35,21 @@ Extract all files into one folder and open `index.html`.
 - styles.css
 - app.js
 - README.md
+
+
+## Rolling progression update
+
+The progression now carries across trigger cycles:
+
+- First triggered cycle: 1u → 2u → 3u.
+- If all three lose, stop betting and wait for the next Banker trigger.
+- The next cycle starts at the last unit reached, so 3u → 4u → 5u.
+- If that whole cycle loses, the next cycle starts 5u → 6u → 7u.
+- When Banker wins, the next cycle starts at winning unit minus 1.
+- Minimum start is always 1 unit.
+- Ties remain pushes and repeat the same unit/attempt.
+
+Examples:
+- Win at 5u → next trigger starts 4u → 5u → 6u.
+- Win at 4u → next trigger starts 3u → 4u → 5u.
+- Win at 1u → next trigger still starts at 1u.
